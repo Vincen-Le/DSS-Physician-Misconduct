@@ -17,8 +17,13 @@ from PIL import Image
 from pdf2image import convert_from_path
 import pytesseract
 
+options = webdriver.ChromeOptions()
+options.add_argument(
+    "user-data-dir=/Users/vincentle/Library/Application Support/Google/Chrome/Default"
+)
+
 driver = webdriver.Chrome(
-    '/Desktop/Berkeley/DSS-Physician-Misconduct/chromedriver')
+    '/Desktop/Berkeley/DSS-Physician-Misconduct/chromedriver', options=options)
 
 case_contents = {}
 
@@ -30,13 +35,13 @@ def main():
     time.sleep(5)
     performSearch("BoardDD", "15")
     time.sleep(5)
-    #case_num = openCase('//*[@id="content"]/div/table/tbody[1]/tr[1]/td[7]/a')
+    case_num = openCase('//*[@id="content"]/div/table/tbody[1]/tr[1]/td[7]/a')
 
     # Get all case numbers from column of current table in window
-    all_cases = getAllCases('//*[@id="content"]/div/table')
+    # all_cases = getAllCases('//*[@id="content"]/div/table')
 
-    print(all_cases)
-    #print(case_num)
+    #print(all_cases)
+    print(case_num)
 
 
 # Performs initial search on medical board's homepage
