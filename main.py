@@ -9,6 +9,8 @@ import time
 
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 # PyTesseract Imports
 import os
@@ -18,12 +20,15 @@ from pdf2image import convert_from_path
 import pytesseract
 
 options = webdriver.ChromeOptions()
-options.add_argument(
-    "user-data-dir=/Users/vincentle/Library/Application Support/Google/Chrome/Default"
-)
+options.add_argument = {
+    "user-data-dir":
+    "/Users/vincentle/Library/Application Support/Google/Chrome/Default"
+}
 
-driver = webdriver.Chrome(
-    '/Desktop/Berkeley/DSS-Physician-Misconduct/chromedriver', options=options)
+chromedriver_path = '/Users/vincentle/chromedriver/chromedriver'
+#chromedriver_path = '/Desktop/Berkeley/DSS-Physician-Misconduct/chromedriver'
+
+driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
 
 case_contents = {}
 
@@ -105,4 +110,12 @@ def pyTest():
         print("Page # {} - {}".format(str(page_number), txt))
 
 
-main()
+def test_profile():
+    test_url = 'http://www.google.com/'
+    driver.get(test_url)
+    time.sleep(5)
+    driver.close()
+
+
+#main()
+test_profile()
